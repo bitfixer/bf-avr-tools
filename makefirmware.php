@@ -23,16 +23,24 @@
 
 // process intel hex file into my firmware format
 
-if (count($argv) < 4)
+if (count($argv) < 3)
 {
-    print "usage: php makefirmware.php <input_hexfile> <output_binfile> <programsize>";
+    print "usage: php makefirmware.php <input_hexfile> <output_binfile> <optional:programsize>";
     die;
 }
 
 $infile = $argv[1];
 $outfile = $argv[2];
-$programsize = $argv[3];
-
+    
+if (count($argv) < 4)
+{
+    $programsize = 999999;
+}
+else
+{   
+    $programsize = $argv[3];
+}
+    
 $contents = file_get_contents($infile);
 $fpout = fopen($outfile, "wb");
 
