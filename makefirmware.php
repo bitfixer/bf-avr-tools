@@ -116,14 +116,16 @@ foreach ($lines as $l)
 print "$totalbytes bytes.\n";
 
 $rem = $programsize - $totalbytes;
-print "remaining $rem bytes.\n";
-
-for ($i = 0; $i < $rem; $i++)
+if ($programsize < 999999)
 {
-    $bin = pack('C', 0xff);
-    fwrite($fpout, $bin);
-}
+    print "remaining $rem bytes.\n";
 
+    for ($i = 0; $i < $rem; $i++)
+    {
+        $bin = pack('C', 0xff);
+        fwrite($fpout, $bin);
+    }
+}
 fclose($fpout);
 
 ?>
